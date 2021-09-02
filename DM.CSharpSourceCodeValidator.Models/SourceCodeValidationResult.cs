@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DM.CSharpSourceCodeValidator.Models
 {
@@ -9,13 +8,10 @@ namespace DM.CSharpSourceCodeValidator.Models
 
         public List<ValidationError> ValidationErrors { get; private set;}
        
-
-
         public SourceCodeValidationResult(bool isAvalidCompilation, List<ValidationError> validationErrors  = null)
         {
             this.IsAvalidCompilation = isAvalidCompilation;
             this.ValidationErrors = validationErrors ?? new List<ValidationError>();
-            
         }
 
     }

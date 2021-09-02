@@ -7,6 +7,5 @@ namespace DM.CSharpSourceCodeValidator.Implementation
         public static SourceCodeValidator GetCSharpSourceCodeValidator()
             =>  new CSharpSourceCodeValidator();
 
-
     }
 }

@@ -11,6 +11,7 @@ namespace DM.CSharpSourceCodeValidator.Implementation
 {
     internal class DynamicCSharpCompiler
     {
+        //TODO refactor method
         public SourceCodeValidationResult Compile(string CSharpSourceCode, string newCompilationAssemblyName)
         {
             using (var peStream = new MemoryStream())
@@ -18,7 +19,7 @@ namespace DM.CSharpSourceCodeValidator.Implementation
                 var result = GenerateCode(CSharpSourceCode, newCompilationAssemblyName).Emit(peStream);
 
                 if (!result.Success)
-                {
+                {       //TODO refactor
                     var failures = result.Diagnostics.Where(diagnostic => diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
                     var validationResult = new SourceCodeValidationResult(false);
 
@@ -40,22 +41,13 @@ namespace DM.CSharpSourceCodeValidator.Implementation
                 {
                      return new SourceCodeValidationResult(true);
                 }
-                    
-                    //var failures = result.Diagnostics.Where(diagnostic => diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
-
-                    //foreach (var diagnostic in failures)
-                    //{
-                    //    Console.WriteLine(diagnostic.Location.Kind);
-                    //    Console.WriteLine(diagnostic.Location.GetLineSpan().ToString());
-                    //    Console.Error.WriteLine("{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
-                    //}
-
             }
         }
-
-        private  CSharpCompilation GenerateCode(string sourceCode, string newCompilationAssemblyName)
+        //TODO refactor method
+        private CSharpCompilation GenerateCode(string sourceCode, string newCompilationAssemblyName)
         {
             var codeString = SourceText.From(sourceCode);
+            #warning Source code validation is set to version 7.3
             var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_3);
 
             var parsedSyntaxTree = SyntaxFactory.ParseSyntaxTree(codeString, options);
