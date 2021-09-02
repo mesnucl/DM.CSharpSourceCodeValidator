@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DM.CSharpSourceCodeValidator.Implementation.tests.Test_files
+{
+    public class PersonInvalid
+    {
+        This line makes the source code invalid
+        public string Name { get; set; }
+    }
+}

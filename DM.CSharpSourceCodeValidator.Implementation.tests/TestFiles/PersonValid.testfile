@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DM.CSharpSourceCodeValidator.Implementation.tests.Test_files
+{
+    public class PersonValid
+    {
+        public string Name { get; set; }
+    }
+}
