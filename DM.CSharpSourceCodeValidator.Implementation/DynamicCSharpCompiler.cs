@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace DM.CSharpSourceCodeValidator.Implementation
 {
@@ -16,19 +17,30 @@ namespace DM.CSharpSourceCodeValidator.Implementation
             {
                 var result = GenerateCode(CSharpSourceCode, newCompilationAssemblyName).Emit(peStream);
 
-                if (!result.Success) {
+                if (!result.Success)
+                {
+                    var failures = result.Diagnostics.Where(diagnostic => diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
+                    var validationResult = new SourceCodeValidationResult(false);
 
-                   
+                    failures.ToList().ForEach(failure => {
 
+                        validationResult.ValidationErrors.Add(
+                            new ValidationError
+                            {
+                                ErrorMessage = failure.GetMessage(),
+                                LineNumber = failure.Location.GetLineSpan().StartLinePosition.Line
+                            }
+                           ); ; 
+                    
+                    });
 
-
-                    return new SourceCodeValidationResult(false);
+                    return validationResult;
                 }
                 else
-                    return new SourceCodeValidationResult(true);
-
-                
-
+                {
+                     return new SourceCodeValidationResult(true);
+                }
+                    
                     //var failures = result.Diagnostics.Where(diagnostic => diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
 
                     //foreach (var diagnostic in failures)
@@ -38,12 +50,6 @@ namespace DM.CSharpSourceCodeValidator.Implementation
                     //    Console.Error.WriteLine("{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
                     //}
 
-                    //return null;
-                
-
-                //peStream.Seek(0, SeekOrigin.Begin);
-
-                //return peStream.ToArray();
             }
         }
 

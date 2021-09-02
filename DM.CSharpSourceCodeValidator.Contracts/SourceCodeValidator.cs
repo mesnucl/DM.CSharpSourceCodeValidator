@@ -1,7 +1,4 @@
 ﻿using DM.CSharpSourceCodeValidator.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DM.CSharpSourceCodeValidator.Contracts
 {
