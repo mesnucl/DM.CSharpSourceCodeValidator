@@ -15,4 +15,6 @@
 - There is a need for more tests. Both compounds and unit test.
 - All tests have only been performed on a Windows platform.
 - There is still alot of decoupling and refactoring to be done.
+- Filtering is needed for validations errors. Currently validation error caused
+  by a single line in the source code creates 6 validation errors.
 
