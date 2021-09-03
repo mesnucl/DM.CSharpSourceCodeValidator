@@ -32,7 +32,7 @@ namespace DM.CSharpSourceCodeValidator.Implementation.tests.Compound
             Assert.True(result.IsAvalidCompilation);
         }
         [Fact]
-        public void ValidateSourceCode_ReturnsErrorLine8WithInvalidSourceCode_TestValidationIsErrorLineisZero()
+        public void ValidateSourceCode_ReturnsErrorLineStart9WithInvalidSourceCode_TestValidationHasErrorLineStartAtLine9()
         {
             SourceCodeValidator sut = GetSourceCodeValidator();
             string sourceCode = getInvalidSourceCodeAsString();
@@ -40,7 +40,19 @@ namespace DM.CSharpSourceCodeValidator.Implementation.tests.Compound
             SourceCodeValidationResult result = sut.ValidateSourceCode(sourceCode, "testAssembly");
 
            
-            Assert.Equal(9, result.ValidationErrors.First().LineNumber);
+            Assert.Equal(9, result.ValidationErrors.First().LineNumberBegin);
+        }
+
+        [Fact]
+        public void ValidateSourceCode_ReturnsErrorLineEnd9WithInvalidSourceCode_TestValidationHasErrorLineENDAtLine9()
+        {
+            SourceCodeValidator sut = GetSourceCodeValidator();
+            string sourceCode = getInvalidSourceCodeAsString();
+
+            SourceCodeValidationResult result = sut.ValidateSourceCode(sourceCode, "testAssembly");
+
+
+            Assert.Equal(9, result.ValidationErrors.First().LineNumberEnd);
         }
 
 

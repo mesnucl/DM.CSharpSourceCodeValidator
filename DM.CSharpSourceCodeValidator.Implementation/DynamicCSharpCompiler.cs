@@ -29,7 +29,8 @@ namespace DM.CSharpSourceCodeValidator.Implementation
                             new ValidationError
                             {
                                 ErrorMessage = failure.GetMessage(),
-                                LineNumber = failure.Location.GetLineSpan().StartLinePosition.Line
+                                LineNumberBegin = failure.Location.GetLineSpan().StartLinePosition.Line+1, // The error line from the compiler is zero based. probably more intuitive to start from 0
+                                LineNumberEnd = failure.Location.GetLineSpan().EndLinePosition.Line+1
                             }
                            ); ; 
                     

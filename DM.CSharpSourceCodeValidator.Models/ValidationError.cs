@@ -6,7 +6,8 @@ namespace DM.CSharpSourceCodeValidator.Models
 {
     public class ValidationError
     {
-        public int LineNumber { get; set; }
+        public int LineNumberBegin { get; set; }
+        public int LineNumberEnd { get; set; }
         public string ErrorMessage { get; set; }
 
     }
