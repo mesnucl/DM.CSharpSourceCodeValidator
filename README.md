@@ -1,4 +1,4 @@
-# A project to validate where C# code is valid or not.
+# A project to validate whether  C# code is valid or not.
 
 ## How to use.
 1. Call the CSharpSourceCodeValidatorFactory located in the assembly "DM.CSharpSourceCodeValidator.Implementation.tests".
