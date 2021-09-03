@@ -6,14 +6,14 @@ using Xunit;
 
 namespace DM.CSharpSourceCodeValidator.Implementation.tests.Compound
 {
-    public class CSharpSourceCodeValidator : BaseTest
+    public class CSharpSourceCodeValidator : CompoundBaseTest
     {
 
         [Fact]
         public void ValidateSourceCode_WithInvalidSourceCode_TestValidationIsFalse() {
 
             SourceCodeValidator sut = GetSourceCodeValidator();
-            string sourceCode = getInvalidSourceCodeAsString();
+            string sourceCode = getInvalidSourceCodeWithSingleErrorLineAsString();
 
             SourceCodeValidationResult result = sut.ValidateSourceCode(sourceCode, "testAssembly");
 
@@ -35,7 +35,7 @@ namespace DM.CSharpSourceCodeValidator.Implementation.tests.Compound
         public void ValidateSourceCode_ReturnsErrorLineStart9WithInvalidSourceCode_TestValidationHasErrorLineStartAtLine9()
         {
             SourceCodeValidator sut = GetSourceCodeValidator();
-            string sourceCode = getInvalidSourceCodeAsString();
+            string sourceCode = getInvalidSourceCodeWithSingleErrorLineAsString();
 
             SourceCodeValidationResult result = sut.ValidateSourceCode(sourceCode, "testAssembly");
 
@@ -47,7 +47,7 @@ namespace DM.CSharpSourceCodeValidator.Implementation.tests.Compound
         public void ValidateSourceCode_ReturnsErrorLineEnd9WithInvalidSourceCode_TestValidationHasErrorLineENDAtLine9()
         {
             SourceCodeValidator sut = GetSourceCodeValidator();
-            string sourceCode = getInvalidSourceCodeAsString();
+            string sourceCode = getInvalidSourceCodeWithSingleErrorLineAsString();
 
             SourceCodeValidationResult result = sut.ValidateSourceCode(sourceCode, "testAssembly");
 
@@ -55,6 +55,27 @@ namespace DM.CSharpSourceCodeValidator.Implementation.tests.Compound
             Assert.Equal(9, result.ValidationErrors.First().LineNumberEnd);
         }
 
+        [Fact]
+        public void ValidateSourCode_ReturnCorrectStartLineWithInvalidSourceCodeOnMultipleLines_TestValidationHasErrorLineStartAtLine9() {
 
+            SourceCodeValidator sut = GetSourceCodeValidator();
+            string sourceCode = getInvalidSourceCodeWithTwoErrorLineAsString();
+
+            SourceCodeValidationResult result = sut.ValidateSourceCode(sourceCode, "testAssembly");
+
+
+            Assert.Equal(9, result.ValidationErrors.First().LineNumberBegin);
+        }
+        [Fact]
+        public void ValidateSourCode_ReturnCorrectEndLineWithInvalidSourceCodeOnMultipleLines_TestValidationHasErrorLineEndAtLine11()
+        {
+            SourceCodeValidator sut = GetSourceCodeValidator();
+            string sourceCode = getInvalidSourceCodeWithTwoErrorLineAsString();
+
+            SourceCodeValidationResult result = sut.ValidateSourceCode(sourceCode, "testAssembly");
+
+
+            Assert.Equal(11, result.ValidationErrors.Last().LineNumberEnd);
+        }
     }
 }

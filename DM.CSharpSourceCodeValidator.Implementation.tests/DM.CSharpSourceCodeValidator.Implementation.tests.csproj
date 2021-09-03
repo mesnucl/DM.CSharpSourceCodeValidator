@@ -29,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestFiles\PersonInvalidTwoErrorLines.testfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestFiles\PersonInvalid.testfile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
