@@ -8,5 +8,10 @@
 3. Call ValidateSourceCode method and a SourceCodeValidationResult will be returned. which contains a boolean property
    that indicates wheter the code was valid or not. And 2 int properties with number of the line where the error starts
    and a number of where the error ends.
-
+   
+ ## Issues
+ - Currently the langauge version of the source code to be compiled is hardcoded to be C# 7.3. That means features above C# 7.3 
+   will fail validation. 
+- There is a need for more tests. Both compounds and unit test.
+- There is still alot of decoupling and refactoring to be done.
 
