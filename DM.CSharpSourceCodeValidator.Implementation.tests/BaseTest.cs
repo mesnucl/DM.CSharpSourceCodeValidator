@@ -1,11 +1,19 @@
 ﻿using System;
 using System.IO;
+using Xunit.Abstractions;
 
 namespace DM.CSharpSourceCodeValidator.Implementation.tests
 {
     public abstract class BaseTest
     {
-       
+        private readonly ITestOutputHelper output;
+
+        public BaseTest(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
+
+
         public string getInvalidSourceCodeWithSingleErrorLineAsString()
         {
             // Ensure that testfiles are copied to debug library on test runs
@@ -27,5 +35,8 @@ namespace DM.CSharpSourceCodeValidator.Implementation.tests
             return File.ReadAllText(pathToTestFile);
         }
 
+        public void writeMessageToConsole(string message) {
+            output.WriteLine(message);
+        }
     }
 }

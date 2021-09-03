@@ -3,11 +3,15 @@ using DM.CSharpSourceCodeValidator.Contracts;
 using DM.CSharpSourceCodeValidator.Models;
 using System.Linq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace DM.CSharpSourceCodeValidator.Implementation.tests.Compound
 {
     public class CSharpSourceCodeValidator : CompoundBaseTest
     {
+
+        public CSharpSourceCodeValidator(ITestOutputHelper output) :base(output)
+        {}
 
         [Fact]
         public void ValidateSourceCode_WithInvalidSourceCode_TestValidationIsFalse() {
@@ -19,6 +23,23 @@ namespace DM.CSharpSourceCodeValidator.Implementation.tests.Compound
 
 
             Assert.False(result.IsAvalidCompilation);
+        }
+        [Fact]
+        public void ValidateSourceCode_ValiddateThatOnlyOneValidationErrorIsReturnedWithSingleInvalidLineOfSourceCode_LengthOfValidationErrorsIsOne()
+        {
+            /*
+              It seems that multiple Validation Errors is generated from 1 single line of invalid source code
+              This requires some investigation. The Assumption so far have been that 1 line of invalid source code
+              would generate 1 Validation error
+             */
+
+            SourceCodeValidator sut = GetSourceCodeValidator();
+            string sourceCode = getInvalidSourceCodeWithSingleErrorLineAsString();
+
+            SourceCodeValidationResult result = sut.ValidateSourceCode(sourceCode, "testAssembly");
+
+            Assert.Single(result.ValidationErrors);
+            
         }
         [Fact]
         public void ValidateSourceCode_WithValidSourceCode_TestValidationIsTrue()

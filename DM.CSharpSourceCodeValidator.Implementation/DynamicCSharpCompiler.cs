@@ -3,7 +3,6 @@ using DM.CSharpSourceCodeValidator.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using System;
 using System.IO;
 using System.Linq;
 
@@ -16,32 +15,28 @@ namespace DM.CSharpSourceCodeValidator.Implementation
         {
             using (var peStream = new MemoryStream())
             {
-                var result = GenerateCode(CSharpSourceCode, newCompilationAssemblyName).Emit(peStream);
+                var compiledCode = GenerateCode(CSharpSourceCode, newCompilationAssemblyName).Emit(peStream);
 
-                if (!result.Success)
+                if (!compiledCode.Success)
                 {       //TODO refactor
-                    var failures = result.Diagnostics.Where(diagnostic => diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
+                    var failures = compiledCode.Diagnostics.Where(diagnostic => diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
                     var validationResult = new SourceCodeValidationResult(false);
 
-                    failures.ToList().ForEach(failure => {
-
-                        validationResult.ValidationErrors.Add(
-                            new ValidationError
-                            {
-                                ErrorMessage = failure.GetMessage(),
-                                LineNumberBegin = failure.Location.GetLineSpan().StartLinePosition.Line+1, // The error line from the compiler is zero based. probably more intuitive to start from 1
-                                LineNumberEnd = failure.Location.GetLineSpan().EndLinePosition.Line+1
-                            }
-                           ); ; 
-                    
+                    failures.ToList()
+                        .ForEach(failure => {
+                            validationResult.ValidationErrors.Add(
+                                new ValidationError
+                                {
+                                    ErrorMessage = failure.GetMessage(),
+                                    LineNumberBegin = failure.Location.GetLineSpan().StartLinePosition.Line+1, // The error line from the compiler is zero based. probably more intuitive to start from 1
+                                    LineNumberEnd = failure.Location.GetLineSpan().EndLinePosition.Line+1
+                                }
+                               );
                     });
-
                     return validationResult;
                 }
                 else
-                {
-                     return new SourceCodeValidationResult(true);
-                }
+                    return new SourceCodeValidationResult(true);
             }
         }
         //TODO refactor method
@@ -52,11 +47,10 @@ namespace DM.CSharpSourceCodeValidator.Implementation
             var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_3);
 
             var parsedSyntaxTree = SyntaxFactory.ParseSyntaxTree(codeString, options);
-
+            //TODO Make included reference dynamic
             var references = new MetadataReference[]
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(System.Runtime.AssemblyTargetedPatchBandAttribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo).Assembly.Location),
             };
