@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DM.CSharpSourceCodeValidator.Implementation", "DM.CSharpSourceCodeValidator.Implementation\DM.CSharpSourceCodeValidator.Implementation.csproj", "{0D0EB833-2D99-4CA7-BD0B-57C75ED72D19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DM.CSharpSourceCodeValidator.Implementation", "DM.CSharpSourceCodeValidator.Implementation\DM.CSharpSourceCodeValidator.Implementation.csproj", "{0D0EB833-2D99-4CA7-BD0B-57C75ED72D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DM.CSharpSourceCodeValidator.Contracts", "DM.CSharpSourceCodeValidator.Contracts\DM.CSharpSourceCodeValidator.Contracts.csproj", "{ECFB1F08-8844-4FDC-88E9-6629FE1F2B5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DM.CSharpSourceCodeValidator.Contracts", "DM.CSharpSourceCodeValidator.Contracts\DM.CSharpSourceCodeValidator.Contracts.csproj", "{ECFB1F08-8844-4FDC-88E9-6629FE1F2B5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DM.CSharpSourceCodeValidator.Models", "DM.CSharpSourceCodeValidator.Models\DM.CSharpSourceCodeValidator.Models.csproj", "{BC660DE4-7982-467C-AE07-938B88D97C0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DM.CSharpSourceCodeValidator.Models", "DM.CSharpSourceCodeValidator.Models\DM.CSharpSourceCodeValidator.Models.csproj", "{BC660DE4-7982-467C-AE07-938B88D97C0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DM.CSharpSourceCodeValidator.Implementation.tests", "DM.CSharpSourceCodeValidator.Implementation.tests\DM.CSharpSourceCodeValidator.Implementation.tests.csproj", "{F262FF4E-DF81-4D6E-AE20-EE11BF0D66E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DM.CSharpSourceCodeValidator.Implementation.tests", "DM.CSharpSourceCodeValidator.Implementation.tests\DM.CSharpSourceCodeValidator.Implementation.tests.csproj", "{F262FF4E-DF81-4D6E-AE20-EE11BF0D66E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
