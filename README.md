@@ -13,5 +13,6 @@
  - Currently the langauge version of the source code to be compiled is hardcoded to be C# 7.3. That means features above C# 7.3 
    will fail validation. 
 - There is a need for more tests. Both compounds and unit test.
+- All tests have only been performed on a Windows platform.
 - There is still alot of decoupling and refactoring to be done.
 
